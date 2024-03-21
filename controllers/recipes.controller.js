@@ -1,26 +1,40 @@
 import { RecipeModel } from "../models/recipe.js";
 
-
-export const addRecipe = async (req, res) => {
-   // Add Recipe to the database
+export const addRecipe = async (req, res, next) => {
+  // Add Recipe to the database
+  try {
     const createResult = await RecipeModel.create(req.body);
     //Return Response
     res.json(createResult);
+  } catch (error) {
+    // forward to express error handler
+    next(error);
   }
+};
 
-  export const getRecipes = (req, res) => {
-    res.send("GET");
+export const getRecipes = async (req, res, next) => {
+  try {
+    const findRecipes = await RecipeModel.find(req.body);
+    res.json(findRecipes);
+  } catch (error) {
+    next(error);
   }
-  
-  export const getRecipe =  (req, res) => {
-    res.send("get.com");
-  }
+};
 
-  export const updateRecipe = (req, res) => {
-    res.send("Patch them all");
+export const getRecipe = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const getSingleRecipe = await RecipeModel.findById(id);
+    res.json(getSingleRecipe);
+  } catch (error) {
+    next(error);
   }
+};
 
-  export const deleteRecipe = (req, res) => {
-    res.send("burn it all");
-  }
-  
+export const updateRecipe = (req, res) => {
+  res.send("Patch them all");
+};
+
+export const deleteRecipe = (req, res) => {
+  res.send("burn it all");
+};

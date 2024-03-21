@@ -13,7 +13,7 @@ App.use(express.json())
 App.use(express.urlencoded({extended: false}));
 App.use(cors())
 
-App.use(router)
+App.use('/recipes',router)
 
 const PORT = process.env.PORT || 7070
 
