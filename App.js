@@ -12,6 +12,7 @@ const App = express()
 App.use(express.json())
 App.use(express.urlencoded({extended: false}));
 App.use(cors())
+App.use(express.static('uploads'));
 
 App.use('/recipes',router)
 
