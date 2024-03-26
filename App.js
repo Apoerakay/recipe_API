@@ -7,14 +7,14 @@ import cors from "cors"
 
 dotenv.config();
 
-const App = express()
+const app = express()
 
-App.use(express.json())
-App.use(express.urlencoded({extended: false}));
-App.use(cors())
-App.use(express.static('uploads'));
+app.use(express.json())
+app.use(express.urlencoded({extended: false}));
+app.use(cors())
+app.use(express.static('uploads'));
 
-App.use('/recipes',router)
+app.use('/recipes',router)
 
 const PORT = process.env.PORT || 7070
 
@@ -23,7 +23,7 @@ const PORT = process.env.PORT || 7070
 await mongoose.connect(process.env.MONGO_URI);
 
 
-App.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log(`express app is running! ${PORT}`)
     
 });
